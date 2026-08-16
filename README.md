@@ -1,43 +1,46 @@
-# Caderno Temático: Arquitetura de Software com NotebookLM
+# Caderno Temático: Arquitetura de Software com NotebookLM (Gemini Notebook)
 
 ## 1. Contexto e Objetivos
-* **Tema Escolhido:** Arquitetura de Software (Padrões Arquiteturais, Monolitos vs. Microsserviços e Boas Práticas).
-* **Objetivo de Estudo:** Criar um guia de consulta rápida e curadoria técnica sobre princípios de arquitetura de software, utilizando o Google NotebookLM para sintetizar e organizar conteúdos de referência sem alucinações.
+* **Tema Escolhido:** Princípios de Design de Software, Governança Arquitetural (ADR) e Padrões Distribuídos (Saga).
+* **Objetivo de Estudo:** Criar um guia prático e curadoria técnica de conceitos fundamentais de arquitetura e design de software, utilizando o Google NotebookLM para sintetizar e cruzar informações de referências conceituadas do setor.
 
 ---
 
 ## 2. Curadoria de Fontes
-Relação de artigos e documentos inseridos no NotebookLM para fundamentação das respostas:
-1. `monoliths-vs-microservices.pdf` - Comparativo sobre monolitos e microsserviços.
-2. `clean-architecture-principles.md` - Princípios e separação de camadas em Clean Architecture.
-3. `design-patterns-summary.pdf` - Resumo de padrões de projeto estruturais e criacionais.
+Relação de fontes de referência utilizadas como base de conhecimento no NotebookLM:
+1. [AHA Programming (Kent C. Dodds)](https://kentcdodds.com/blog/aha-programming) - Princípio *Avoid Hasty Abstractions* (Evite Abstrações Precipitadas) e o equilíbrio com DRY/WET.
+2. [Don't Repeat Yourself (Wikipedia)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) - Definição formal e implicações do princípio DRY na redução de redundância.
+3. [Architecture Decision Record (GitHub Org)](https://github.com/architecture-decision-record/architecture-decision-record) - Repositório e documentação do padrão ADR para registro de decisões arquiteturais.
+4. [Architecture Decision Record (Martin Fowler)](https://martinfowler.com/bliki/ArchitectureDecisionRecord.html) - Análise de Martin Fowler sobre como documentar decisões técnicas contextuais ao longo do tempo.
+5. [Saga Distributed Transactions Pattern (Microsoft Learn)](https://learn.microsoft.com/en-us/azure/architecture/patterns/saga) - Padrão arquitetural Saga para gerenciamento de transações em sistemas distribuídos e microsserviços.
 
 ---
 
 ## 3. Engenharia de Prompts & Troubleshooting ("Cicatrizes")
 
-* **Teste 1 (Prompt Genérico):**
-  * *Prompt:* "O que é arquitetura de software?"
-  * *Resultado:* Resposta muito ampla e vaga, sem focar nas fontes.
-* **Teste 2 (Ajuste de Contexto):**
-  * *Prompt:* "Com base exclusivamente nas fontes enviadas, liste as 3 principais diferenças entre monolitos e microsserviços em formato de tabela."
-  * *Resultado:* Excelente síntese em tabela com pontos de acoplamento, escalabilidade e complexidade operacional.
-* **Ajustes e Lições (Troubleshooting):** Foi necessário especificar o papel da IA ("Atue como um Arquiteto de Software Sênior") e solicitar dados em tabelas/tópicos para obter saídas estruturadas e sem prolixidade.
+* **Teste 1 (Prompt Amplo):**
+  * *Prompt:* "O que é DRY e Saga?"
+  * *Resultado:* Respostas superficiais e sem aprofundamento na relação entre abstração de código e arquitetura distribuída.
+* **Teste 2 (Refinamento com Persona e Foco nas Fontes):**
+  * *Prompt:* "Atue como um Arquiteto de Software Sênior. Com base exclusivamente nas fontes fornecidas, compare o princípio DRY com AHA Programming e explique quando aplicar o padrão Saga em microsserviços."
+  * *Resultado:* A IA detalhou o perigo da duplicação versus abstração prematura e explicou claramente a orquestração e coreografia no padrão Saga.
+* **Ajustes e Lições (Troubleshooting):** Fornecer links de fontes autoritativas (como Martin Fowler e Microsoft Learn) e estruturar prompts pedindo comparações conceituais garantiu respostas fundamentadas e livres de alucinações.
 
 ---
 
 ## 4. Miniguia de Estudo (Entrega Final)
 
 ### Resumo Estruturado
-* **Arquitetura Monolítica:** Aplicação unificada onde todas as camadas (UI, regra de negócio, acesso a dados) residem no mesmo codebase. Alta simplicidade inicial, mas escalabilidade complexa.
-* **Microsserviços:** Divisão do sistema em serviços independentes por domínio de negócio. Alta flexibilidade e escalabilidade, porém traz complexidade de rede e governança.
-* **Clean Architecture:** Foco na independência de frameworks e separação de responsabilidades (camadas internas protegem as regras de negócio de mudanças externas).
+* **DRY vs. AHA Programming:** O princípio DRY (*Don't Repeat Yourself*) visa evitar a duplicação de conhecimento. No entanto, o princípio AHA (*Avoid Hasty Abstractions*) alerta que a duplicação precoce é frequentemente muito mais barata de manter do que a abstração errada criada antes da hora.
+* **Architecture Decision Records (ADRs):** Documentos curtos e versionados com o código que registram decisões arquiteturais importantes, o contexto em que foram tomadas e suas consequências.
+* **Padrão Saga:** Padrão para manter a consistência de dados em arquiteturas de microsserviços por meio de uma sequência de transações locais, onde falhas disparam ações de compensação (rollback compensatório).
 
 ### Glossário de Conceitos
-* **Coupling (Acoplamento):** O nível de dependência entre dois módulos de software.
-* **Cohesion (Coesão):** O grau em que as responsabilidades de um único módulo estão relacionadas entre si.
-* **RAG (Retrieval-Augmented Generation):** Técnica usada pelo NotebookLM para responder perguntas ancoradas em documentos específicos fornecidos pelo usuário.
+* **ADR (Architecture Decision Record):** Registro formal e estruturado de uma decisão arquitetural.
+* **AHA (Avoid Hasty Abstractions):** Princípio que preconiza preferir código duplicado a uma abstração apressada.
+* **Saga Pattern:** Mecanismo para gerenciar transações distribuídas sem depender de bloqueios de transação distribuída de duas fases (2PC).
+* **Compensating Transaction (Transação de Compensação):** Transação que desfaz logicamente o efeito de uma transação anterior caso uma etapa da Saga falhe.
 
 ### Prompts Reutilizáveis
 ```text
-Atue como um Arquiteto de Software Sênior. Com base nos documentos fornecidos, explique o impacto do acoplamento em um sistema monolítico e sugira 3 estratégias de refatoração para desacoplá-lo.
+Atue como um Arquiteto de Software Sênior. Com base nas fontes cadastradas, explique como documentar uma mudança estrutural de monólito para microsserviços usando ADRs e quais os critérios para decidir entre coreografia ou orquestração ao adotar o padrão Saga.
